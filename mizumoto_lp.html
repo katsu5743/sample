@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Masahisa Mizumoto — Japan Kaizen Consultant</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:   #1B2D4F;
+    --navy2:  #122040;
+    --gold:   #C8963C;
+    --gold2:  #E8B55A;
+    --cream:  #F8F5EF;
+    --white:  #ffffff;
+    --text:   #2C3E50;
+    --muted:  #6B7B8D;
+    --light:  #F0EDE8;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ===== NAV ===== */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 4rem;
+    background: rgba(27,45,79,0.96);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(200,150,60,0.3);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem; font-weight: 600;
+    color: var(--gold); letter-spacing: 0.05em;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    color: rgba(255,255,255,0.8);
+    text-decoration: none; font-size: 0.82rem;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+
+  /* ===== HERO ===== */
+  .hero {
+    min-height: 100vh;
+    background: var(--navy2);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 80% at 70% 50%, rgba(200,150,60,0.08) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 20% 80%, rgba(200,150,60,0.05) 0%, transparent 60%);
+  }
+  /* 対角ゴールドライン */
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 42%;
+    width: 1px; height: 100%;
+    background: linear-gradient(to bottom, transparent, rgba(200,150,60,0.4) 30%, rgba(200,150,60,0.4) 70%, transparent);
+  }
+
+  .hero-left {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 8rem 4rem 4rem 6rem;
+    position: relative; z-index: 2;
+    animation: fadeUp 1s ease both;
+  }
+  .hero-tag {
+    font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1.8rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .hero-tag::before {
+    content: ''; display: block;
+    width: 2rem; height: 1px; background: var(--gold);
+  }
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 5vw, 4.5rem);
+    font-weight: 300; line-height: 1.1;
+    color: var(--white); margin-bottom: 0.5rem;
+  }
+  .hero-name em {
+    font-style: italic; color: var(--gold2);
+    display: block;
+  }
+  .hero-jp {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 1rem; font-weight: 300;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 0.15em; margin-bottom: 2rem;
+  }
+  .hero-title {
+    font-size: 1rem; font-weight: 400;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.6; margin-bottom: 3rem;
+    max-width: 420px;
+  }
+  .hero-title strong { color: var(--gold2); font-weight: 500; }
+  .hero-stats {
+    display: flex; gap: 2.5rem; margin-bottom: 3rem;
+  }
+  .stat { text-align: left; }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.8rem; font-weight: 600;
+    color: var(--gold); line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.72rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: rgba(255,255,255,0.5);
+    margin-top: 0.3rem;
+  }
+  .hero-cta {
+    display: inline-flex; align-items: center; gap: 0.8rem;
+    padding: 0.9rem 2.2rem;
+    background: var(--gold);
+    color: var(--navy2); font-weight: 600;
+    font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .hero-cta:hover { background: var(--gold2); transform: translateX(4px); }
+  .hero-cta::after { content: '→'; }
+
+  .hero-right {
+    display: flex; align-items: flex-end; justify-content: center;
+    padding: 6rem 4rem 0;
+    position: relative; z-index: 2;
+    animation: fadeUp 1s 0.2s ease both;
+  }
+  .photo-frame {
+    position: relative;
+    width: 340px;
+  }
+  .photo-frame::before {
+    content: '';
+    position: absolute;
+    top: -20px; left: -20px; right: 20px; bottom: 20px;
+    border: 1px solid rgba(200,150,60,0.3);
+    z-index: -1;
+  }
+  .photo-frame img {
+    width: 100%; display: block;
+    filter: grayscale(10%) contrast(1.05);
+  }
+  .photo-badge {
+    position: absolute; bottom: -1px; left: -20px;
+    background: var(--gold);
+    padding: 1rem 1.5rem;
+    font-size: 0.75rem; font-weight: 600;
+    color: var(--navy2); letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* ===== SECTION BASE ===== */
+  section { padding: 6rem 0; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 4rem; }
+  .section-tag {
+    font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .section-tag::before {
+    content: ''; display: block;
+    width: 2rem; height: 1px; background: var(--gold);
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 400; line-height: 1.2;
+    color: var(--navy); margin-bottom: 3rem;
+  }
+
+  /* ===== EXPERTISE ===== */
+  .expertise { background: var(--white); }
+  .expertise-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5px;
+    background: rgba(27,45,79,0.08);
+    margin-top: 1rem;
+  }
+  .expertise-card {
+    background: var(--white);
+    padding: 2rem 1.8rem;
+    position: relative; overflow: hidden;
+    transition: background 0.3s;
+  }
+  .expertise-card:hover { background: var(--cream); }
+  .expertise-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0;
+    width: 3px; height: 0;
+    background: var(--gold);
+    transition: height 0.3s;
+  }
+  .expertise-card:hover::before { height: 100%; }
+  .exp-icon {
+    font-size: 1.8rem; margin-bottom: 1rem;
+  }
+  .exp-title {
+    font-weight: 600; font-size: 0.9rem;
+    color: var(--navy); margin-bottom: 0.5rem;
+    letter-spacing: 0.02em;
+  }
+  .exp-desc {
+    font-size: 0.82rem; color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* ===== CREDENTIALS ===== */
+  .credentials { background: var(--navy); }
+  .credentials .section-title { color: var(--white); }
+  .cred-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+  }
+  .cred-item {
+    display: flex; align-items: flex-start; gap: 1rem;
+    padding: 1.2rem 1.5rem;
+    border: 1px solid rgba(200,150,60,0.2);
+    background: rgba(255,255,255,0.03);
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .cred-item:hover {
+    border-color: rgba(200,150,60,0.5);
+    background: rgba(200,150,60,0.06);
+  }
+  .cred-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--gold); flex-shrink: 0; margin-top: 6px;
+  }
+  .cred-text { font-size: 0.85rem; color: rgba(255,255,255,0.8); line-height: 1.5; }
+  .cred-text strong { color: var(--gold2); display: block; font-size: 0.78rem;
+    letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.2rem; }
+
+  /* ===== INDIA ===== */
+  .india { background: var(--cream); }
+  .india-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;
+  }
+  .india-engagements { display: flex; flex-direction: column; gap: 0; }
+  .engagement {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid rgba(27,45,79,0.1);
+    display: grid; grid-template-columns: 60px 1fr; gap: 1rem; align-items: start;
+  }
+  .engagement:first-child { border-top: 1px solid rgba(27,45,79,0.1); }
+  .eng-year {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; font-weight: 600; color: var(--gold);
+    line-height: 1;
+  }
+  .eng-content {}
+  .eng-city {
+    font-weight: 600; font-size: 0.9rem; color: var(--navy);
+    margin-bottom: 0.3rem;
+  }
+  .eng-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
+
+  .india-quote {
+    background: var(--navy);
+    padding: 3rem;
+    position: relative;
+  }
+  .india-quote::before {
+    content: '"';
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 8rem; font-weight: 300;
+    color: rgba(200,150,60,0.2);
+    position: absolute; top: -1rem; left: 1.5rem;
+    line-height: 1;
+  }
+  .quote-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; font-style: italic;
+    color: var(--white); line-height: 1.7;
+    position: relative; z-index: 1;
+    margin-bottom: 2rem;
+  }
+  .quote-attr {
+    font-size: 0.78rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--gold);
+  }
+  .india-flag {
+    font-size: 4rem; text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  .india-count {
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 5rem; font-weight: 600; color: var(--gold);
+    line-height: 1;
+  }
+  .india-count-label {
+    text-align: center; font-size: 0.78rem;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: rgba(255,255,255,0.6); margin-top: 0.5rem;
+  }
+
+  /* ===== GLOBAL ===== */
+  .global { background: var(--white); }
+  .countries-wrap {
+    display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 2rem;
+  }
+  .country-tag {
+    padding: 0.4rem 1rem;
+    border: 1px solid rgba(27,45,79,0.15);
+    font-size: 0.8rem; color: var(--navy);
+    transition: all 0.2s;
+  }
+  .country-tag:hover {
+    background: var(--navy); color: var(--gold);
+    border-color: var(--navy);
+  }
+  .country-tag.india {
+    background: var(--navy); color: var(--gold);
+    border-color: var(--navy);
+  }
+
+  /* ===== PUBLICATIONS ===== */
+  .publications { background: var(--cream); }
+  .pub-list { display: flex; flex-direction: column; gap: 0.8rem; margin-top: 1rem; }
+  .pub-item {
+    display: flex; align-items: center; gap: 1.2rem;
+    padding: 1rem 1.5rem;
+    background: var(--white);
+    border-left: 3px solid transparent;
+    transition: border-color 0.2s;
+  }
+  .pub-item:hover { border-left-color: var(--gold); }
+  .pub-icon { font-size: 1.2rem; flex-shrink: 0; }
+  .pub-title { font-size: 0.88rem; font-weight: 500; color: var(--navy); }
+  .pub-detail { font-size: 0.78rem; color: var(--muted); margin-top: 0.2rem; }
+
+  /* ===== CONTACT ===== */
+  .contact {
+    background: var(--navy2);
+    text-align: center;
+    padding: 6rem 2rem;
+  }
+  .contact .section-tag { justify-content: center; }
+  .contact .section-tag::before { display: none; }
+  .contact .section-title { color: var(--white); }
+  .contact-grid {
+    display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap;
+    margin-top: 3rem;
+  }
+  .contact-item {
+    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+  }
+  .contact-label {
+    font-size: 0.68rem; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--gold);
+  }
+  .contact-value {
+    font-size: 1rem; color: var(--white);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .contact-value:hover { color: var(--gold2); }
+  .contact-divider {
+    width: 1px; background: rgba(200,150,60,0.3);
+    align-self: stretch;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--navy2);
+    border-top: 1px solid rgba(200,150,60,0.15);
+    padding: 1.5rem 4rem;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  footer p { font-size: 0.75rem; color: rgba(255,255,255,0.35); }
+
+  /* ===== ANIMATIONS ===== */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .reveal {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-left { padding: 6rem 2rem 2rem; }
+    .hero-right { display: none; }
+    .container { padding: 0 1.5rem; }
+    .expertise-grid { grid-template-columns: 1fr; }
+    .cred-grid { grid-template-columns: 1fr; }
+    .india-grid { grid-template-columns: 1fr; gap: 2rem; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Masahisa Mizumoto</div>
+  <ul class="nav-links">
+    <li><a href="#expertise">Expertise</a></li>
+    <li><a href="#credentials">Credentials</a></li>
+    <li><a href="#india">India</a></li>
+    <li><a href="#global">Global</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">Japan-based Consultant</div>
+    <h1 class="hero-name">
+      Masahisa<br>
+      <em>Mizumoto</em>
+    </h1>
+    <p class="hero-jp">水元 勝久</p>
+    <p class="hero-title">
+      Executive Consultant specializing in <strong>Toyota Production System</strong>,
+      <strong>Lean Six Sigma</strong>, and <strong>Quality Management</strong>
+      — delivering results across manufacturing, service, and construction industries worldwide.
+    </p>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">35+</div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">15</div>
+        <div class="stat-label">Countries</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">6</div>
+        <div class="stat-label">India Visits</div>
+      </div>
+    </div>
+    <a href="#contact" class="hero-cta">Get in Touch</a>
+  </div>
+  <div class="hero-right">
+    <div class="photo-frame">
+      <img src="data:image/png;base64,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" alt="Masahisa Mizumoto">
+      <div class="photo-badge">Executive Consultant</div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERTISE -->
+<section class="expertise" id="expertise">
+  <div class="container">
+    <div class="section-tag reveal">Areas of Expertise</div>
+    <h2 class="section-title reveal">What I Bring<br>to Your Organization</h2>
+    <div class="expertise-grid reveal">
+      <div class="expertise-card">
+        <div class="exp-icon">🏭</div>
+        <div class="exp-title">Toyota Production System (TPS)</div>
+        <div class="exp-desc">Deep practical expertise in TPS — from shop floor Kaizen to office and service industry applications. Trained directly through Toyota-affiliated OB consultants.</div>
+      </div>
+      <div class="expertise-card">
+        <div class="exp-icon">📊</div>
+        <div class="exp-title">Lean Six Sigma</div>
+        <div class="exp-desc">Master Black Belt certified. DMAIC / DMADC methodologies applied to manufacturing and service environments across Asia, Europe and South America.</div>
+      </div>
+      <div class="expertise-card">
+        <div class="exp-icon">✅</div>
+        <div class="exp-title">Quality Management</div>
+        <div class="exp-desc">IATF 16949, VDA 6.3, ISO 9001 — certified former lead auditor and instructor. Extensive experience with automotive-sector quality systems.</div>
+      </div>
+      <div class="expertise-card">
+        <div class="exp-icon">🏢</div>
+        <div class="exp-title">Office & Service Kaizen</div>
+        <div class="exp-desc">Pioneer in applying TPS principles beyond the factory floor — to offices, service operations, and administrative workflows for measurable efficiency gains.</div>
+      </div>
+      <div class="expertise-card">
+        <div class="exp-icon">🔧</div>
+        <div class="exp-title">TPM / JIT Production</div>
+        <div class="exp-desc">Total Productive Maintenance and Just-in-Time production management. Practical, hands-on guidance from shop floor to management level.</div>
+      </div>
+      <div class="expertise-card">
+        <div class="exp-icon">📋</div>
+        <div class="exp-title">Project Management</div>
+        <div class="exp-desc">PMP certified. Structured project delivery methodology combined with Japanese Kaizen philosophy for sustainable, long-term improvement culture.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CREDENTIALS -->
+<section class="credentials" id="credentials">
+  <div class="container">
+    <div class="section-tag reveal">Qualifications</div>
+    <h2 class="section-title reveal">Credentials &amp;<br>International Recognition</h2>
+    <div class="cred-grid reveal">
+      <div class="cred-item">
+        <div class="cred-dot"></div>
+        <div class="cred-text"><strong>Certification</strong>PMP — Project Management Professional</div>
+      </div>
+      <div class="cred-item">
+        <div class="cred-dot"></div>
+        <div class="cred-text"><strong>Certification</strong>Lean Six Sigma Master Black Belt</div>
+      </div>
+      <div class="cred-item">
+        <div class="cred-dot"></div>
+        <div class="cred-text"><strong>International Expert</strong>Registered: JICA / APO / AOTS / JOGMEC</div>
+      </div>
+      <div class="cred-item">
+        <div class="cred-dot"></div>
+        <div class="cred-text"><strong>Former Auditor</strong>IATF 16949 &amp; VDA 6.3 Certified Lead Auditor / Instructor</div>
+      </div>
+      <div class="cred-item">
+        <div class="cred-dot"></div>
+        <div class="cred-text"><strong>Former Auditor</strong>ISO 9001 Certified Lead Auditor / Instructor</div>
+      </div>
+      <div class="cred-item">
+        <div class="cred-dot"></div>
+        <div class="cred-text"><strong>Speaker</strong>APO Keynote Speaker — Service Kaizen (Thailand, Vietnam, Pakistan, Taiwan)</div>
+      </div>
+      <div class="cred-item">
+        <div class="cred-dot"></div>
+        <div class="cred-text"><strong>Background</strong>Formerly Head of International Division, Chubu Sangyo Renmei (est. 1948)</div>
+      </div>
+      <div class="cred-item">
+        <div class="cred-dot"></div>
+        <div class="cred-text"><strong>Author</strong>6 published works on TPS, Lean, and Kaizen (Kindle + Nikkan Kogyo Shimbun)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INDIA -->
+<section class="india" id="india">
+  <div class="container">
+    <div class="section-tag reveal">India Focus</div>
+    <h2 class="section-title reveal">6 On-Site Engagements<br>Across India</h2>
+    <div class="india-grid reveal">
+      <div class="india-engagements">
+        <div class="engagement">
+          <div class="eng-year">2026</div>
+          <div class="eng-content">
+            <div class="eng-city">Ahmedabad</div>
+            <div class="eng-desc">Kaizen workshop for semiconductor manufacturer</div>
+          </div>
+        </div>
+        <div class="engagement">
+          <div class="eng-year">2024</div>
+          <div class="eng-content">
+            <div class="eng-city">Delhi &amp; Pondicherry</div>
+            <div class="eng-desc">Kaizen training for vocational college faculty — commissioned by Japan's Ministry of Economy, Trade and Industry (METI)</div>
+          </div>
+        </div>
+        <div class="engagement">
+          <div class="eng-year">2019</div>
+          <div class="eng-content">
+            <div class="eng-city">Delhi &amp; Pune</div>
+            <div class="eng-desc">Factory diagnosis via visual standard methodology</div>
+          </div>
+        </div>
+        <div class="engagement">
+          <div class="eng-year">+3</div>
+          <div class="eng-content">
+            <div class="eng-city">Other Engagements</div>
+            <div class="eng-desc">Auto parts, electronics, and industrial manufacturers across India</div>
+          </div>
+        </div>
+      </div>
+      <div class="india-quote">
+        <div class="india-flag">🇮🇳</div>
+        <div class="india-count">6</div>
+        <div class="india-count-label">On-site visits to India</div>
+        <br>
+        <p class="quote-text">
+          "I see tremendous potential in India and am committed to contributing to its continued growth."
+        </p>
+        <div class="quote-attr">— Masahisa Mizumoto</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GLOBAL -->
+<section class="global" id="global">
+  <div class="container">
+    <div class="section-tag reveal">Global Track Record</div>
+    <h2 class="section-title reveal">15 Countries,<br>Dozens of Engagements</h2>
+    <p class="reveal" style="color:var(--muted); margin-bottom:1rem; font-size:0.9rem;">
+      All lectures and on-site guidance delivered in <strong>English</strong>.
+    </p>
+    <div class="countries-wrap reveal">
+      <span class="country-tag">Netherlands</span>
+      <span class="country-tag">Singapore</span>
+      <span class="country-tag">South Korea</span>
+      <span class="country-tag">Taiwan</span>
+      <span class="country-tag">Thailand</span>
+      <span class="country-tag">Vietnam</span>
+      <span class="country-tag india">India ★</span>
+      <span class="country-tag">Brazil</span>
+      <span class="country-tag">Indonesia</span>
+      <span class="country-tag">Philippines</span>
+      <span class="country-tag">Mozambique</span>
+      <span class="country-tag">Iran</span>
+      <span class="country-tag">Sri Lanka</span>
+      <span class="country-tag">Pakistan</span>
+      <span class="country-tag">Bangladesh</span>
+    </div>
+  </div>
+</section>
+
+<!-- PUBLICATIONS -->
+<section class="publications" id="publications">
+  <div class="container">
+    <div class="section-tag reveal">Published Works</div>
+    <h2 class="section-title reveal">Books &amp; Publications</h2>
+    <div class="pub-list reveal">
+      <div class="pub-item">
+        <div class="pub-icon">📘</div>
+        <div>
+          <div class="pub-title">"Office TPS" — Toyota Production System for the Office</div>
+          <div class="pub-detail">Kindle / Digital Edition</div>
+        </div>
+      </div>
+      <div class="pub-item">
+        <div class="pub-icon">📘</div>
+        <div>
+          <div class="pub-title">"Eliminating Office Waste"</div>
+          <div class="pub-detail">Kindle / Digital Edition</div>
+        </div>
+      </div>
+      <div class="pub-item">
+        <div class="pub-icon">📘</div>
+        <div>
+          <div class="pub-title">"Family Kaizen"</div>
+          <div class="pub-detail">Kindle / Digital Edition</div>
+        </div>
+      </div>
+      <div class="pub-item">
+        <div class="pub-icon">📘</div>
+        <div>
+          <div class="pub-title">"Toyota Production System"</div>
+          <div class="pub-detail">Kindle / Digital Edition</div>
+        </div>
+      </div>
+      <div class="pub-item">
+        <div class="pub-icon">📗</div>
+        <div>
+          <div class="pub-title">"Office Work Improvement Encyclopedia"</div>
+          <div class="pub-detail">Co-author — Nikkan Kogyo Shimbun (Japan Industrial Publishing)</div>
+        </div>
+      </div>
+      <div class="pub-item">
+        <div class="pub-icon">📙</div>
+        <div>
+          <div class="pub-title">"VDA 6.3" — German Automotive Standard</div>
+          <div class="pub-detail">Co-translator — Chubu Sangyo Renmei</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="section-tag">Contact</div>
+    <h2 class="section-title">Ready to Start<br>a Conversation?</h2>
+    <p style="color:rgba(255,255,255,0.6); font-size:0.9rem; max-width:480px; margin:0 auto;">
+      Available for consulting engagements, workshops, and keynote presentations — in English, across Asia and beyond.
+    </p>
+    <div class="contact-grid">
+      <div class="contact-item">
+        <div class="contact-label">Email</div>
+        <a href="mailto:thankskaizen@gmail.com" class="contact-value">thankskaizen@gmail.com</a>
+      </div>
+      <div class="contact-divider"></div>
+      <div class="contact-item">
+        <div class="contact-label">Phone</div>
+        <a href="tel:+818051190305" class="contact-value">+81-80-5119-0305</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Masahisa Mizumoto — thankskaizen.com</p>
+  <p>Japan-based Independent Consultant</p>
+</footer>
+
+<script>
+  // スクロールリビール
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
